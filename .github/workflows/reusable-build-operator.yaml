@@ -49,6 +49,7 @@ jobs:
   build-operator:
     name: Build ${{ inputs.operator_name }}-operator image using buildah
     runs-on: ubuntu-latest
+    if: ${{ env.imagenamespace }}
 
     steps:
     - uses: actions/checkout@v4
@@ -105,6 +106,7 @@ jobs:
     needs: build-operator
     name: ${{ inputs.operator_name }}-operator-bundle
     runs-on: ubuntu-latest
+    if: ${{ env.imagenamespace }}
 
     steps:
     - name: Install Go
@@ -196,6 +198,7 @@ jobs:
     needs: build-operator-bundle
     name: operator-index
     runs-on: ubuntu-latest
+    if: ${{ env.imagenamespace }}
 
     steps:
     - name: Install Go
