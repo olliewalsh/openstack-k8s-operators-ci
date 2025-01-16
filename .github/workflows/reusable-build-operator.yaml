@@ -27,6 +27,10 @@ on:
         required: false
         type: string
         default: ""
+      enabled:
+        required: false
+        type: boolean
+        default: true
     secrets:
       IMAGENAMESPACE:
         required: true
@@ -49,7 +53,7 @@ jobs:
   build-operator:
     name: Build ${{ inputs.operator_name }}-operator image using buildah
     runs-on: ubuntu-latest
-    if: ${{ env.imagenamespace }}
+    if: ${{ inputs.enabled }}
 
     steps:
     - uses: actions/checkout@v4
@@ -106,7 +110,7 @@ jobs:
     needs: build-operator
     name: ${{ inputs.operator_name }}-operator-bundle
     runs-on: ubuntu-latest
-    if: ${{ env.imagenamespace }}
+    if: ${{ inputs.enabled }}
 
     steps:
     - name: Install Go
@@ -198,7 +202,7 @@ jobs:
     needs: build-operator-bundle
     name: operator-index
     runs-on: ubuntu-latest
-    if: ${{ env.imagenamespace }}
+    if: ${{ inputs.enabled }}
 
     steps:
     - name: Install Go
