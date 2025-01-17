@@ -47,7 +47,7 @@ env:
 jobs:
 
   check-secrets:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check secrets are set
         id: check
@@ -61,7 +61,7 @@ jobs:
   build-operator:
     needs: check-secrets
     name: Build ${{ inputs.operator_name }}-operator image using buildah
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: needs.check-secrets.outputs.missing-secrets != 'true'
 
     steps:
@@ -118,7 +118,7 @@ jobs:
   build-operator-bundle:
     needs: build-operator
     name: ${{ inputs.operator_name }}-operator-bundle
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Install Go
@@ -209,7 +209,7 @@ jobs:
   build-operator-index:
     needs: build-operator-bundle
     name: operator-index
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Install Go

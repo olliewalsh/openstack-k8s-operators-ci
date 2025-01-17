@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   testmaster:
     name: github (govet, golint and gotest) OSPdO master
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Install Go
         uses: actions/setup-go@v3
@@ -29,7 +29,7 @@ jobs:
 
   teststable: # OSPdO v1.2.x
     name: github (govet, golint and gotest) OSPdO v1.2.x
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Install Go
         uses: actions/setup-go@v3
